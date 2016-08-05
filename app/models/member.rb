@@ -15,4 +15,11 @@
 #
 
 class Member < ActiveRecord::Base
+  def self.search(query)
+    one = order 'number'
+    if query.present?
+      one = one.where('name LIKE ? OR full_name LIKE ?', "%#{query}%", "%#{query}%")
+    end
+    one
+  end
 end
