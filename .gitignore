@@ -15,11 +15,5 @@
 /log/*
 !/log/.keep
 /tmp
-<<<<<<< HEAD
-/.idea/
-/.DS_Store
-/.gitignore
-=======
 /.idea/*
 /.idea
->>>>>>> dev
