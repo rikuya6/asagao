@@ -24,5 +24,6 @@ module Asagao
     config.active_record.raise_in_transactional_callbacks = true
     config.action_controller.permit_all_parameters = true
     config.time_zone = 'Tokyo'
+    config.web_console.development_only = false
   end
 end

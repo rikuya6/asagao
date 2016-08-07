@@ -45,7 +45,7 @@ class Member < ActiveRecord::Base
 
   def check_email
     if email.present?
-      errors.add(:email, :invalid) unless well_formed_as_email_address(:email)
+      errors.add(:email, :invalid) unless well_formed_as_email_address(email)
     end
   end
 end
