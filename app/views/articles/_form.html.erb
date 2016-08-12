@@ -21,9 +21,11 @@
     <td>
       <%= form.check_box :no_expiration %>
       <%= form.label :no_expiration %><br />
+      <div id="article_expired_at">
       <%= form.datetime_select :expired_at,
             start_year: Date.current.year, end_year: Date.current.year + 1,
             user_month_numbers: true %>
+      </div>
     </td>
   </tr>
     <th><%= Article.human_attribute_name(:member_only) %></th>
