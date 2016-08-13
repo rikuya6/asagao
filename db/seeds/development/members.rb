@@ -9,6 +9,8 @@ gnames = %w(太郎 二郎 花子)
     email: "#{names[idx]}@example.com",
     birthday: '1981-12-01',
     gender: [0, 0, 0][idx % 3],
-    administrator: idx.zero?
+    administrator: idx.zero?,
+    password: 'password',
+    password_confirmation: 'password'
   )
 end
