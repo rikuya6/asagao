@@ -8,6 +8,7 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test 'index before login' do
-    assert_raise(ApplicationController::Forbidden) { get :index }
+    get :index
+    assert_response :forbidden
   end
 end

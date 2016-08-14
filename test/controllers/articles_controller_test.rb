@@ -27,7 +27,8 @@ class ArticlesControllerTest < ActionController::TestCase
 
   test 'new before login' do
     logout
-    assert_raise(ApplicationController::Forbidden) { get :new }
+    get :new
+    assert_response :forbidden
   end
 
   test 'edit' do

@@ -12,7 +12,7 @@ Member.create(
   password: 'password',
   password_confirmation: 'password'
 )
-1.upto(10) do |idx|
+1.upto(30) do |idx|
   Member.create(
     number: idx + 10,
     name: names[idx],

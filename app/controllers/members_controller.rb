@@ -2,6 +2,7 @@ class MembersController < ApplicationController
   before_action :login_required
   def index
     @members = Member.order('number')
+      .paginate(page: params[:page], per_page: 15)
   end
 
   def show
@@ -43,6 +44,7 @@ class MembersController < ApplicationController
 
   def search
     @members = Member.search(params[:q])
+      .paginate(page: params[:page], per_page: 15)
     render 'index'
   end
 

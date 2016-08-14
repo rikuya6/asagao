@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :articles
   resource :session, only: [:create, :destroy]
   resource :account, only: [:show, :edit, :update]
+  match '*anything' => 'top#not_found', via: [:get, :post, :patch, :delete]
 end

@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.readable_for(current_member).order(released_at: :desc)
+      .paginate(page: params[:page], per_page: 5)
   end
 
   def show
