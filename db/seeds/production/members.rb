@@ -1,9 +1,8 @@
 names = %w(Taro Jiro Hana John Mike Sophy Bill Alex Mary Tom)
 fnames = ["佐藤", "鈴木", "高橋", "田中"]
 gnames = ["太郎", "次郎", "花子"]
-
 Member.create(
-  number: 88,
+  number: 10,
   name: 'Rikuya',
   full_name: 'Rikuya Saito',
   email: 'rikuya@test.com',
@@ -13,8 +12,7 @@ Member.create(
   password: 'password',
   password_confirmation: 'password'
 )
-
-0.upto(9) do |idx|
+1.upto(30) do |idx|
   Member.create(
     number: idx + 10,
     name: names[idx],
@@ -23,20 +21,6 @@ Member.create(
     birthday: "1981-12-01",
     gender: [0, 0, 1][idx % 3],
     administrator: (idx == 0),
-    password: "password",
-    password_confirmation: "password"
-  )
-end
-
-0.upto(29) do |idx|
-  Member.create(
-    number: idx + 20,
-    name: "John#{idx + 1}",
-    full_name: "John#{idx+1}@example.com",
-    email: "#{names[idx]}@example.com",
-    birthday: "1981-12-01",
-    gender: 0,
-    administrator: false,
     password: "password",
     password_confirmation: "password"
   )

@@ -2,21 +2,23 @@
 #
 # Table name: members
 #
-#  id            :integer          not null, primary key
-#  number        :integer          not null
-#  name          :string           not null
-#  full_name     :string
-#  email         :string
-#  birthday      :date
-#  gender        :integer          default(0), not null
-#  administrator :boolean          default(FALSE), not null
-#  created_at    :datetime
-#  updated_at    :datetime
+#  id              :integer          not null, primary key
+#  number          :integer          not null
+#  name            :string           not null
+#  full_name       :string
+#  email           :string
+#  birthday        :date
+#  gender          :integer          default(0), not null
+#  administrator   :boolean          default(FALSE), not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#  hashed_password :string
 #
 
 class Member < ActiveRecord::Base
   include EmailAddressChecker
 
+  attr_accessor :password, :password_confirmation
 
   validates :number,      presence: true,
                           numericality: { only_integer: true, greater_than: 0, less_then: 100, allow_blank: true },
@@ -32,6 +34,15 @@ class Member < ActiveRecord::Base
 
   validate  :check_email
 
+  validates :password,    presence: { on: :create },
+                          confirmation: { allow_blank: true }
+
+  def password=(val)
+    if val.present?
+      self.hashed_password = BCrypt::Password.create(val)
+    end
+    @password = val
+  end
 
   private
 
@@ -46,6 +57,16 @@ class Member < ActiveRecord::Base
   def check_email
     if email.present?
       errors.add(:email, :invalid) unless well_formed_as_email_address(email)
+    end
+  end
+
+  def self.authenticate(name, password)
+    member = find_by(name: name)
+    if member && member.hashed_password.present? &&
+        BCrypt::Password.new(member.hashed_password) == password
+      member
+    else
+      nil
     end
   end
 end
