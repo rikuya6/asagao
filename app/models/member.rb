@@ -12,7 +12,7 @@
 #  administrator   :boolean          default(FALSE), not null
 #  created_at      :datetime
 #  updated_at      :datetime
-#  hashed_password :stirng
+#  hashed_password :string
 #
 
 class Member < ActiveRecord::Base
@@ -57,6 +57,16 @@ class Member < ActiveRecord::Base
   def check_email
     if email.present?
       errors.add(:email, :invalid) unless well_formed_as_email_address(email)
+    end
+  end
+
+  def self.authenticate(name, password)
+    member = find_by(name: name)
+    if member && member.hashed_password.present? &&
+        BCrypt::Password.new(member.hashed_password) == password
+      member
+    else
+      nil
     end
   end
 end

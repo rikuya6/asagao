@@ -7,7 +7,7 @@
 #  body        :text             not null
 #  released_at :datetime         not null
 #  expired_at  :datetime
-#  member_only :boolean          default(FALSE)
+#  member_only :boolean          default(FALSE), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

@@ -18,12 +18,22 @@ ActiveRecord::Schema.define(version: 20160813145513) do
     t.text     "body",                        null: false
     t.datetime "released_at",                 null: false
     t.datetime "expired_at"
-    t.boolean  "member_only", default: false
+    t.boolean  "member_only", default: false, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
 
-# Could not dump table "members" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "members", force: :cascade do |t|
+    t.integer  "number",                          null: false
+    t.string   "name",                            null: false
+    t.string   "full_name"
+    t.string   "email"
+    t.date     "birthday"
+    t.integer  "gender",          default: 0,     null: false
+    t.boolean  "administrator",   default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "hashed_password"
+  end
 
 end

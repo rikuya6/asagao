@@ -12,7 +12,7 @@
 #  administrator   :boolean          default(FALSE), not null
 #  created_at      :datetime
 #  updated_at      :datetime
-#  hashed_password :stirng
+#  hashed_password :string
 #
 
 FactoryGirl.define do
