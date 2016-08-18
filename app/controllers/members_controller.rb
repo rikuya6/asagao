@@ -7,6 +7,11 @@ class MembersController < ApplicationController
 
   def show
     @member = Member.find(params[:id])
+    if params[:format].in?(['jpg', 'png', 'gif'])
+      send_image
+    else
+      render 'show'
+    end
   end
 
   def new
@@ -55,5 +60,14 @@ class MembersController < ApplicationController
       :password, :password_confirmation]
     attrs << :administrator if current_member.administrator?
     params.require(:member).permit(attrs)
+  end
+
+  def send_image
+    if @member.image.present?
+      send_data @member.image.data,
+        tpey: @member.image.content_type, disposition: 'inline'
+    else
+      raise NotFound
+    end
   end
 end
