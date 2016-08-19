@@ -15,7 +15,7 @@ Member.create(
 )
 
 0.upto(9) do |idx|
-  Member.create(
+  member = Member.create(
     number: idx + 10,
     name: names[idx],
     full_name: "#{fnames[idx % 4]} #{gnames[idx % 3]}",
@@ -25,6 +25,12 @@ Member.create(
     administrator: (idx == 0),
     password: "password",
     password_confirmation: "password"
+  )
+  path = Rails.root.join("db/seeds/development", "member#{idx % 3 + 1}.jpg")
+  file = Rack::Test::UploadedFile.new(path, "image/jpeg", true)
+  MemberImage.create(
+    member: member,
+    uploaded_image: file
   )
 end
 

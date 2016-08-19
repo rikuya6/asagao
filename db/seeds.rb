@@ -1,8 +1,8 @@
-table_name = %w(members articles)
-table_name.each do |table_name|
-  path = Rails.root.join('db/seeds', Rails.env, table_name + '.rb')
+table_name = %w(members articles entries)
+table_name.each do |name|
+  path = Rails.root.join('db/seeds', Rails.env, name + '.rb')
   if File.exist?(path)
-    puts "Creating #{table_name}..."
+    puts "Creating #{name}..."
     require path
   end
 end

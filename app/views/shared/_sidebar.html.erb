@@ -9,7 +9,10 @@
 
 <h2>会員のブログ</h2>
 <ul>
-  <% 5.times do |i| %>
-    <li><%= link_to 'ブログの見出し', '#' %></li>
+  <% Entry.sidebar_entries(current_member, 5).each do |entry| %>
+  <li>
+    <%= link_to entry.title, entry %>
+    by <%= link_to entry.author.name, [entry.author, :entries] %>
+  </li>
   <% end %>
 </ul>
