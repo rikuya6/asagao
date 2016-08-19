@@ -25,6 +25,6 @@ class ActiveSupport::TestCase
   # アップロードしたファイル
   def uploaded_file(fname, type)
     Rack::Test::UploadedFile.new(
-    Rails.root.join('test/factories', fname), type, true)
+      Rails.root.join("test/factories", fname), type, true)
   end
 end
