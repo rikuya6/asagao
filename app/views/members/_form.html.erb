@@ -1,6 +1,22 @@
 <%= render 'shared/errors', obj: @member %>
 
 <table class='attr'>
+  <%= form.fields_for :image do |imgf| %>
+    <tr>
+      <th><%= imgf.label :uploaded_image %></th>
+      <td>
+        <%= imgf.file_field :uploaded_image %>
+        <% if !imgf.object.new_record? && imgf.object.errors.empty? %>
+          <div>
+            <%= member_image_tag @member, width: 60 %>
+            <%= imgf.check_box :_destroy %>
+            <%= imgf.label :_destroy %>
+            <%= imgf.hidden_field :id %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
   <tr>
     <th><%= form.label :number %></th>
     <td><%= form.text_field :number, size: 8 %></td>

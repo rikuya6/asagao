@@ -16,10 +16,12 @@ class MembersController < ApplicationController
 
   def new
     @member = Member.new(birthday: Date.new(1997, 1, 1,))
+    @member.build_image
   end
 
   def edit
     @member = Member.find(params[:id])
+    @member.build_image unless @member.image
   end
 
   def create
@@ -56,16 +58,17 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    attrs = [:member, :name, :full_name, :gender, :birthday, :email,
+    attrs = [:number, :name, :full_name, :gender, :birthday, :email,
       :password, :password_confirmation]
     attrs << :administrator if current_member.administrator?
+    attrs << { image_attributes: [:_destroy, :id, :uploaded_image] }
     params.require(:member).permit(attrs)
   end
 
   def send_image
     if @member.image.present?
       send_data @member.image.data,
-        tpey: @member.image.content_type, disposition: 'inline'
+        type: @member.image.content_type, disposition: 'inline'
     else
       raise NotFound
     end

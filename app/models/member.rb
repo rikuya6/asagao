@@ -21,7 +21,8 @@ class Member < ActiveRecord::Base
   attr_accessor :password, :password_confirmation
 
   has_many :entries, dependent: :destroy
-  has_one  :image, class_name: 'MemberImage', dependent: :destroy 
+  has_one  :image, class_name: 'MemberImage', dependent: :destroy
+  accepts_nested_attributes_for :image, allow_destroy: true 
 
   validates :number,      presence: true,
                           numericality: { only_integer: true, greater_than: 0, less_then: 100, allow_blank: true },

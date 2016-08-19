@@ -19,4 +19,10 @@ class ActiveSupport::TestCase
   def logout
     session.delete(:member_id)
   end
+
+  # アップロードしたファイル
+  def uploaded_file(fname, type)
+    Rack::Test::UploadedFile.new(
+    Rails.root.join('test/factories', fname), type, true)
+  end
 end
