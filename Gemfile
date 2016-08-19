@@ -11,6 +11,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails-i18n'
 gem 'bcrypt'
 gem 'will_paginate', '~> 3.0'
+gem 'puma'
 
 group :development, :test do
   gem 'byebug'
@@ -21,10 +22,13 @@ end
 
 group :test do
   gem 'factory_girl_rails'
+  gem 'minitest-reporters'
+  gem 'mini_backtrace'
 end
 
 group :production do
   gem 'pg',             '0.17.1'
   gem 'rails_12factor', '0.0.2'
   gem 'web-console', '~> 2.0'
+  gem 'puma'
 end

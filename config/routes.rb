@@ -8,7 +8,10 @@ Rails.application.routes.draw do
     resources :entries, only: [:index]
   end
   resources :articles
-  resources :entries
+  resources :entries do
+    member { patch 'like', 'unlike' }
+    collection { get 'voted' }
+  end
   resource :session, only: [:create, :destroy]
   resource :account, only: [:show, :edit, :update]
   match '*anything' => 'top#not_found', via: [:get, :post, :patch, :delete]

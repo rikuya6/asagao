@@ -9,4 +9,7 @@
 <% end %>
 by <%= link_to entry.author.name, [entry.author, :entries] %> |
 <%= entry.posted_at.strftime("%Y/%m/%d %H:%M") %>
+<% if (count = entry.votes.count) > 0 %>
+  | <span class="vote">★<%= count %></span>
+<% end %>
 </p>

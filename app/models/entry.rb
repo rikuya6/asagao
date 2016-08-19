@@ -14,9 +14,11 @@
 
 class Entry < ActiveRecord::Base
 
-  belongs_to :author, class_name: 'Member', foreign_key: 'member_id'
-
   STATUS_VALUES = %w(draft member_only public)
+
+  belongs_to :author, class_name: 'Member', foreign_key: 'member_id'
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :member
 
   validates :title,     presence: true, length: { maximum: 200 }
 
